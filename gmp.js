@@ -946,12 +946,13 @@ async function startBot() {
                     });
                   
                     if (recDaftar1.success) {
+                        const grup = Math.ceil(recDaftar1.data.length / 3);
                         let strDaftar = `DAFTAR PESERTA TURNAMEN\n${recDaftar1.data[0].nama_turnamen}\nTanggal : ${DateToStr(recDaftar1.data[0].tgl_realisasi)}\n\n*No. Nama Peserta  #B/L  Pool*\n`;
                         
                         // Proses Mengurutkan Data Pool
                         const dataPool = [];
                         recDaftar1.data.forEach ((item, index) => {
-                            dataPool[index] = {'nu': (index+1), 'nama_pemain': item.nama_pemain, 'ranking_sebelum': item.ranking_sebelum, 'pool': getPool(grp, (index+1))}
+                            dataPool[index] = {'nu': (index+1), 'nama_pemain': item.nama_pemain, 'ranking_sebelum': item.ranking_sebelum, 'pool': getPool(grup, (index+1))}
                         });
                         
 
@@ -1112,7 +1113,7 @@ async function startBot() {
                                 // Proses Mengurutkan Data Pool
                                 const dataPool = [];
                                 recDaftar1.data.forEach ((item, index) => {
-                                    dataPool[index] = {'nu': (index+1), 'nama_pemain': item.nama_pemain, 'ranking_sebelum': item.ranking_sebelum, 'pool': getPool(grp, (index+1))}
+                                    dataPool[index] = {'nu': (index+1), 'nama_pemain': item.nama_pemain, 'ranking_sebelum': item.ranking_sebelum, 'pool': getPool(grup, (index+1))}
                                 });
 
                                 // Urutkan
