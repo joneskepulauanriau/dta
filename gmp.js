@@ -681,7 +681,11 @@ async function startBot() {
                             return; 
                     }
                     
-                    if (command.parameter.length===2) filter = {'presensi.id_pemain =': id_pemain, 'presensi.id_turnamen =': id_turnamen};
+                    if (command.parameter.length===2) {
+                        filter = {'presensi.id_pemain =': id_pemain, 'presensi.id_turnamen =': id_turnamen}; 
+                    } else {
+                        filter = {'presensi.id_turnamen =': id_turnamen};
+                    }
                     
                     const recPresensi = await getDataRowQuery({
                     columns: [`presensi.id_pemain`, `presensi.id_turnamen`, `presensi.id_pemain`, `presensi.id_turnamen`,
@@ -972,6 +976,7 @@ async function startBot() {
                           
                         //console.log(strDaftar);
                         await sock.sendMessage(senderJid, { text: strDaftar });
+                        if (grup!==2) await sock.sendMessage(senderJid, {image: {url: `./src/grup/${grup}.jpg`}, caption: 'Babak Lanjutan'});
                     }
                 } else {
                     await sock.sendMessage(senderJid, { text: `_Presensi *${recPresensi.data[0].nama_pemain}* berjumlah ${recPresensi.data[0].jumlah_hadir}, jadi *belum memenuhi syarat*._`});
@@ -1131,6 +1136,7 @@ async function startBot() {
                                 });
                                 
                                 await sock.sendMessage(senderJid, { text: strDaftar });
+                                if (grup!==2) await sock.sendMessage(senderJid, {image: {url: `./src/grup/${grup}.jpg`}, caption: 'Babak Lanjutan'});
                         }
                     } else {
                         await sock.sendMessage(senderJid, { text: `_Presensi *${recPresensi.data[0].nama_pemain}* berjumlah ${recPresensi.data[0].jumlah_hadir}, jadi *belum memenuhi syarat*._`});
@@ -1216,6 +1222,7 @@ async function startBot() {
                           
                     //console.log(strDaftar);
                     await sock.sendMessage(senderJid, { text: strDaftar });
+                    if (grup!==2) await sock.sendMessage(senderJid, {image: {url: `./src/grup/${grup}.jpg`}, caption: 'Babak Lanjutan'});
                 } else {
                     await sock.sendMessage(senderJid, { text: `_Data tidak tersedia._` });
                 }
